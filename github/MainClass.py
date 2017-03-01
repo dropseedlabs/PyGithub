@@ -650,14 +650,14 @@ class GithubIntegration(object):
             body = json.dumps({"user_id": user_id})
         conn = RequestsConnectionClass("api.github.com")
         conn.request(
-            method="POST",
-            url="/installations/{}/access_tokens".format(installation_id),
-            headers={
+            "POST",
+            "/installations/{}/access_tokens".format(installation_id),
+            body,
+            {
                 "Authorization": "Bearer {}".format(self.create_jwt()),
                 "Accept": "application/vnd.github.machine-man-preview+json",
                 "User-Agent": "PyGithub/Python"
             },
-            body=body
         )
         response = conn.getresponse()
         response_text = response.read()

@@ -30,10 +30,9 @@ import urllib
 import pickle
 import time
 import sys
-from httplib import HTTPSConnection
 from jose import jwt
 
-from Requester import Requester, json
+from Requester import RequestsConnectionClass, Requester, json
 import AuthenticatedUser
 import NamedUser
 import Organization
@@ -649,7 +648,7 @@ class GithubIntegration(object):
         body = None
         if user_id:
             body = json.dumps({"user_id": user_id})
-        conn = HTTPSConnection("api.github.com")
+        conn = RequestsConnectionClass("api.github.com")
         conn.request(
             method="POST",
             url="/installations/{}/access_tokens".format(installation_id),

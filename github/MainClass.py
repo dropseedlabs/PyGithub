@@ -662,9 +662,6 @@ class GithubIntegration(object):
         response = conn.getresponse()
         response_text = response.read()
 
-        if atLeastPython3:
-            response_text = response_text.decode('utf-8')
-
         conn.close()
         if response.status == 201:
             data = json.loads(response_text)
